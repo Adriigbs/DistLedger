@@ -1,4 +1,4 @@
-#Distributed Ledger
+# Distributed Ledger
 
 Um relatório acerca da solução do grupo T38 para a fase 3 do projeto da cadeira de Sistemas Distribuídos 2022/2023.
 
@@ -9,7 +9,7 @@ Este relatório apresenta a solução criada para a terceira fase do projeto, qu
 que partilham o estado através da arquitetura gossip, respondam às solicitações dos processos cliente. 
 
 
-#Ferramentas Implementadas
+# Ferramentas Implementadas
 
 Dado que nesta fase foi implementada a gossip architecture, foram adicionadas as seguintes funcionalidades:
 Aos proto das mensagens de procedimentos remotos (createAccount, getLedgerState, 
@@ -26,7 +26,7 @@ Caso o prev (TimeStamp do Cliente) seja menor ou igual ao ValueTS do Server, a o
 caso não seja, o campo da estabilidade fica falso.
 
 
-#Desafios
+# Desafios
 
 Um dos maiores desafios deste projeto foi implementar o modelo de ordenação causal de operações de escrita, visto ser uma adaptação do gossip architecture. 
 O facto de a atualização dos servidores ser apenas a pedido do Admin, adiciona complexidade na resolução do problema bem como, do ponto de vista do User, 
@@ -36,7 +36,7 @@ Outro desafio foi impedir leituras incoerentes pelo mesmo cliente ou a violaçã
 resolvida certificando que a comparação de Vector Clocks era a correta.
 
 
-#Conclusão
+# Conclusão
 
 Este projeto de um serviço que implementa um ledger distribuído, ao fim de 3 entregas e de 7 semanas de aperfeiçoamento, 
 é capaz de responder e executar tudo o que nos foi solicitado. 
