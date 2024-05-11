@@ -3,7 +3,7 @@
 Um relatório acerca da solução do grupo T38 para a fase 3 do projeto da cadeira de Sistemas Distribuídos 2022/2023.
 
 
-#Introdução
+# Introdução
 
 Este relatório apresenta a solução criada para a terceira fase do projeto, que tem como objetivo que dois servidores, 
 que partilham o estado através da arquitetura gossip, respondam às solicitações dos processos cliente. 
