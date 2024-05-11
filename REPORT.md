@@ -1,42 +1,32 @@
 # Distributed Ledger
 
-Um relatório acerca da solução do grupo T38 para a fase 3 do projeto da cadeira de Sistemas Distribuídos 2022/2023.
+A report on Group T38's solution for phase 3 of the Distributed Systems course project 2022/2023.
 
 
-# Introdução
+# Introduction
 
-Este relatório apresenta a solução criada para a terceira fase do projeto, que tem como objetivo que dois servidores, 
-que partilham o estado através da arquitetura gossip, respondam às solicitações dos processos cliente. 
-
-
-# Ferramentas Implementadas
-
-Dado que nesta fase foi implementada a gossip architecture, foram adicionadas as seguintes funcionalidades:
-Aos proto das mensagens de procedimentos remotos (createAccount, getLedgerState, 
-balance, transferTo) e os User e Admin foram alterados para conterem um Vector Clock.
-Vector Clock, neste projeto, corresponde a um vector de inteiros, que neste caso são 2, um para cada servidor.
-Aos proto das mensagens de operações no ledger foram adicionados dois Vector Clock, um correspondente ao do User/Admin e o outro ao TimeStamp da operação.
-Aos proto das mensagens de operações no ledger foi adicionado um campo booleano para identificar se a operação é ou não estável.
-O Server tem dois Vector Clocks indicando o ValueTS e o ReplicaTS.
-
-Deste modo, o Cliente, quando faz um pedido de leitura a um servidor, ou obtém imediatamente a resposta (servidor atualizado), ou aguarda até que este tenha uma versão mais adequada que possa fornecer, 
-existindo apenas atualização do TimeStamp do Cliente.
-Caso o pedido seja de leitura, o ReplicaTS correspondente ao Server é incrementado. Todas estas operações são adicionadas ao Ledger e nunca são removidas. 
-Caso o prev (TimeStamp do Cliente) seja menor ou igual ao ValueTS do Server, a operação é classificada como estável e executada e o ValueTS é atualizado, 
-caso não seja, o campo da estabilidade fica falso.
+This report presents the solution developed for the third phase of the project, aimed at enabling two servers, which share state through the gossip architecture, to respond to client process requests.
 
 
-# Desafios
+# Implemented features
 
-Um dos maiores desafios deste projeto foi implementar o modelo de ordenação causal de operações de escrita, visto ser uma adaptação do gossip architecture. 
-O facto de a atualização dos servidores ser apenas a pedido do Admin, adiciona complexidade na resolução do problema bem como, do ponto de vista do User, 
-pode ser restritivo no caso do Admin nunca solicitar gossip.
+Given that the gossip architecture was implemented in this phase, the following functionalities were added:
 
-Outro desafio foi impedir leituras incoerentes pelo mesmo cliente ou a violação da causalidade entre operações, 
-resolvida certificando que a comparação de Vector Clocks era a correta.
+Protos of remote procedure messages (createAccount, getLedgerState, balance, transferTo) and User and Admin were modified to include a Vector Clock.
+Vector Clock, in this project, corresponds to a vector of integers, which in this case are 2, one for each server.
+Protos of ledger operation messages had two Vector Clocks added, one corresponding to User/Admin and the other to the operation's TimeStamp.
+Protos of ledger operation messages had a boolean field added to identify whether the operation is stable or not.
+The Server has two Vector Clocks indicating ValueTS and ReplicaTS.
+Thus, when a Client makes a read request to a server, it either immediately receives the response (updated server), or waits until it has a more suitable version to provide, with only the Client's TimeStamp being updated. If the request is for a read, the Server's corresponding ReplicaTS is incremented. All these operations are added to the Ledger and are never removed. If the previous (Client's TimeStamp) is less than or equal to the Server's ValueTS, the operation is classified as stable and executed, and the ValueTS is updated; otherwise, the stability field is false.
+
+# Challenges
+
+One of the major challenges of this project was implementing the causal ordering model of write operations, as it is an adaptation of the gossip architecture. The fact that server updates only occur at the Admin's request adds complexity to problem resolution and, from the User's perspective, it can be restrictive if the Admin never requests gossip.
+
+Another challenge was preventing inconsistent reads by the same client or violation of causality between operations, resolved by ensuring that the comparison of Vector Clocks was correct.
 
 
-# Conclusão
+# Conclusion
 
 Este projeto de um serviço que implementa um ledger distribuído, ao fim de 3 entregas e de 7 semanas de aperfeiçoamento, 
 é capaz de responder e executar tudo o que nos foi solicitado. 
